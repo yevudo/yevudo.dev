@@ -1,0 +1,41 @@
+{
+  "name": "yevudo.dev",
+  "type": "module",
+  "author": "Yevhen Udovychenko",
+  "private": true,
+  "scripts": {
+    "build": "npm run check:eslint && npm run check:prettier && npm run check:ts && nuxt build",
+    "dev": "nuxt dev",
+    "postinstall": "nuxt prepare",
+    "check:eslint": "eslint . --ext .ts,.vue --cache",
+    "check:prettier": "prettier --check --cache .",
+    "check:ts": "nuxt typecheck",
+    "start": "pm2-runtime start ecosystem.config.cjs",
+    "stop": "pm2 stop yevudo.dev"
+  },
+  "engines": {
+    "node": ">=v22.19.0"
+  },
+  "dependencies": {
+    "@nuxt/fonts": "^0.12.1",
+    "@nuxt/hints": "^1.0.0-alpha.5",
+    "@nuxt/image": "^2.0.0",
+    "@nuxt/ui": "^4.3.0",
+    "@nuxtjs/i18n": "^10.2.1",
+    "nuxt": "^4.2.2",
+    "pm2": "^5.4.2",
+    "typescript": "^5.9.3",
+    "vue": "^3.5.26",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.12.1",
+    "@types/node": "^25.0.9",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.0",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "vue-tsc": "^3.2.2"
+  }
+}

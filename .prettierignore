@@ -1,0 +1,8 @@
+**/.yml
+**/.nuxt
+.nuxt
+.vscode
+**/node_modules
+.gitignore
+.git
+*.yml
