@@ -2,5 +2,5 @@
 @import '@nuxt/ui';
 
 @theme {
-  --font-sans: Roboto, sans-serif;
+  --font-sans: Inter, sans-serif;
 }
