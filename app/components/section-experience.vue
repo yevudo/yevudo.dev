@@ -79,7 +79,7 @@
   <UCard>
     <template #header>
       <h2 class="text-xl font-semibold">
-        {{ $t('section.work.experience.title') }}
+        {{ $t('section.experience.title') }}
       </h2>
     </template>
 
