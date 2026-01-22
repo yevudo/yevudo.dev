@@ -14,6 +14,10 @@ export default defineNuxtConfig({
       meta: [
         { name: 'format-detection', content: 'telephone=no' },
         { name: 'theme-color', content: '#ffffff' },
+        {
+          name: 'google-site-verification',
+          content: '6QaVq9IDp2VnENvIapJ0ao11fvqLaW78wRjgTv5x3dE',
+        },
       ],
     },
   },

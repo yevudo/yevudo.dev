@@ -86,11 +86,7 @@
             >
               <span itemprop="name">{{ record.institution }}</span>
             </a>
-            <h3
-              v-else
-              class="p-org text-lg font-bold"
-              itemprop="name"
-            >
+            <h3 v-else class="p-org text-lg font-bold" itemprop="name">
               {{ record.institution }}
             </h3>
 
