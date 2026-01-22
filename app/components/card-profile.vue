@@ -21,10 +21,20 @@
       toggleProfileImageSrc(newValue);
     }
   );
+
+  const { blurBackground } = storeToRefs(useCanvasGameStore());
 </script>
 
 <template>
-  <UCard class="h-card" itemscope itemtype="https://schema.org/Person">
+  <UCard
+    class="h-card transition-all duration-500 ease-in-out"
+    :class="{
+      'bg-white dark:bg-gray-900': !blurBackground,
+      'bg-white/60 backdrop-blur-sm dark:bg-gray-900/60': blurBackground,
+    }"
+    itemscope
+    itemtype="https://schema.org/Person"
+  >
     <template #header>
       <NuxtImg
         class="u-photo mx-auto mb-2 block size-40 rounded-full"

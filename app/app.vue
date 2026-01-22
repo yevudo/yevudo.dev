@@ -11,7 +11,10 @@
 </script>
 
 <template>
-  <UApp :locale="availableUiLocales[locale]">
-    <NuxtPage />
-  </UApp>
+  <CanvasGame />
+  <div class="relative z-10">
+    <UApp :locale="availableUiLocales[locale]">
+      <NuxtPage />
+    </UApp>
+  </div>
 </template>

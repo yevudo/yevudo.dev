@@ -41,10 +41,28 @@
         return 'border-purple-500';
     }
   };
+
+  const recordsVisible = computed(() => {
+    return isCollapsed.value
+      ? recordsComputed.value.slice(0, 3)
+      : recordsComputed.value;
+  });
+
+  const getAnimationOrder = (index: number) => {
+    return isCollapsed.value ? index : Math.max(0, index - 3);
+  };
+
+  const { blurBackground } = storeToRefs(useCanvasGameStore());
 </script>
 
 <template>
-  <UCard>
+  <UCard
+    class="card-wrapper transition-colors duration-500 ease-in-out"
+    :class="{
+      'bg-white dark:bg-gray-900': !blurBackground,
+      'bg-white/60 backdrop-blur-sm dark:bg-gray-900/60': blurBackground,
+    }"
+  >
     <template #header>
       <h2 class="text-xl font-semibold">
         {{ $t('section.education.title') }}
@@ -56,105 +74,110 @@
       itemscope
       itemtype="https://schema.org/Person"
     >
-      <article
-        v-for="(record, index) in recordsComputed"
-        v-show="!isCollapsed || index < 3"
-        :key="record.id"
-        :class="[
-          'h-event border-l-2 pb-6 pl-4 last:pb-0',
-          getBorderColor(record.type),
-        ]"
-        itemprop="alumniOf"
-        itemscope
-        itemtype="https://schema.org/EducationalOrganization"
-      >
-        <div class="mb-3 flex items-start gap-3">
-          <div
-            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-primary/10 to-primary/5"
-          >
-            <UIcon :name="getIcon(record.type)" class="h-5 w-5 text-primary" />
-          </div>
-
-          <div class="flex-1">
-            <a
-              v-if="record.institutionLink"
-              :href="record.institutionLink"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="p-org h-card text-lg font-bold transition-colors hover:text-primary"
-              itemprop="url"
-            >
-              <span itemprop="name">{{ record.institution }}</span>
-            </a>
-            <h3 v-else class="p-org text-lg font-bold" itemprop="name">
-              {{ record.institution }}
-            </h3>
-
-            <p
-              v-if="record.degree"
-              class="p-name mt-1 font-medium text-gray-700 dark:text-gray-300"
-            >
-              {{ record.degree }}
-            </p>
-
+      <TransitionGroup name="cards" tag="div" class="space-y-6" appear>
+        <article
+          v-for="(record, index) in recordsVisible"
+          :key="record.id"
+          :class="[
+            'h-event border-l-2 pb-6 pl-4 last:pb-0',
+            getBorderColor(record.type),
+          ]"
+          itemprop="alumniOf"
+          itemscope
+          itemtype="https://schema.org/EducationalOrganization"
+          :style="{ '--animation-order': getAnimationOrder(index) }"
+        >
+          <div class="mb-3 flex items-start gap-3">
             <div
-              class="mt-2 flex flex-wrap items-center justify-between gap-3 text-sm text-gray-600 dark:text-gray-400"
+              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-primary/10 to-primary/5"
             >
-              <span class="flex items-center gap-1">
-                <UIcon
-                  name="i-heroicons-calendar"
-                  class="h-4 w-4"
-                  aria-hidden="true"
-                />
-                <time
-                  v-if="record.startDate"
-                  class="dt-start"
-                  :datetime="record.startDate"
-                >
-                  {{ formatDate(record.startDate, locale) }}
-                </time>
-                <span v-if="record.startDate && record.endDate">-</span>
-                <time
-                  v-if="record.endDate"
-                  class="dt-end"
-                  :datetime="record.endDate"
-                >
-                  {{ formatDate(record.endDate, locale) }}
-                </time>
-                <span v-else class="dt-end">
-                  {{ $t('section.education.present') }}
+              <UIcon
+                :name="getIcon(record.type)"
+                class="h-5 w-5 text-primary"
+              />
+            </div>
+
+            <div class="flex-1">
+              <a
+                v-if="record.institutionLink"
+                :href="record.institutionLink"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-org h-card text-lg font-bold transition-colors hover:text-primary"
+                itemprop="url"
+              >
+                <span itemprop="name">{{ record.institution }}</span>
+              </a>
+              <h3 v-else class="p-org text-lg font-bold" itemprop="name">
+                {{ record.institution }}
+              </h3>
+
+              <p
+                v-if="record.degree"
+                class="p-name mt-1 font-medium text-gray-700 dark:text-gray-300"
+              >
+                {{ record.degree }}
+              </p>
+
+              <div
+                class="mt-2 flex flex-wrap items-center justify-between gap-3 text-sm text-gray-600 dark:text-gray-400"
+              >
+                <span class="flex items-center gap-1">
+                  <UIcon
+                    name="i-heroicons-calendar"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                  />
+                  <time
+                    v-if="record.startDate"
+                    class="dt-start"
+                    :datetime="record.startDate"
+                  >
+                    {{ formatDate(record.startDate, locale) }}
+                  </time>
+                  <span v-if="record.startDate && record.endDate">-</span>
+                  <time
+                    v-if="record.endDate"
+                    class="dt-end"
+                    :datetime="record.endDate"
+                  >
+                    {{ formatDate(record.endDate, locale) }}
+                  </time>
+                  <span v-else class="dt-end">
+                    {{ $t('section.education.present') }}
+                  </span>
                 </span>
-              </span>
-              <span v-if="record.location" class="flex items-center gap-1">
-                <UIcon
-                  name="i-heroicons-map-pin"
-                  class="h-4 w-4"
-                  aria-hidden="true"
-                />
-                <span class="p-location">
-                  {{ record.location }}
+                <span v-if="record.location" class="flex items-center gap-1">
+                  <UIcon
+                    name="i-heroicons-map-pin"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                  />
+                  <span class="p-location">
+                    {{ record.location }}
+                  </span>
                 </span>
-              </span>
-              <span v-else class="flex items-center gap-1">
-                <UIcon
-                  name="i-heroicons-map-pin"
-                  class="h-4 w-4"
-                  aria-hidden="true"
-                />
-                <span class="p-location">
-                  {{ $t('section.education.online') }}
+                <span v-else class="flex items-center gap-1">
+                  <UIcon
+                    name="i-heroicons-map-pin"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                  />
+                  <span class="p-location">
+                    {{ $t('section.education.online') }}
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <p
-          class="p-summary text-base leading-relaxed text-gray-700 dark:text-gray-300"
-        >
-          {{ record.description }}
-        </p>
-      </article>
+          <p
+            class="p-summary text-base leading-relaxed text-gray-700 dark:text-gray-300"
+          >
+            {{ record.description }}
+          </p>
+        </article>
+      </TransitionGroup>
 
       <div
         v-if="recordsComputed.length > 3"

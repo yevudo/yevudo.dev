@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/fonts',
     '@nuxt/eslint',
+    '@pinia/nuxt',
   ],
 
   colorMode: {

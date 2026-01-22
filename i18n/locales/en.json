@@ -34,5 +34,13 @@
   "action.view": "View",
   "seo.title.suffix": "Senior Full-Stack Developer",
   "month.count": "month | months",
-  "year.count": "year | years"
+  "year.count": "year | years",
+  "canvas.game.collected": "Collected:",
+  "leaderboard.well.done.player": "Well done! 🎉",
+  "leaderboard.enter.name": "Enter your name to see the leaderboard",
+  "leaderboard.name.label": "Your name",
+  "leaderboard.submit.button": "Submit",
+  "leaderboard.error.submission": "Error submitting record to leaderboard. Please try again later.",
+  "leaderboard.title": "Leaderboard",
+  "leaderboard.close": "Close"
 }

@@ -73,10 +73,18 @@
 
     return [yearPart, monthPart].filter(Boolean).join(' ');
   };
+
+  const { blurBackground } = storeToRefs(useCanvasGameStore());
 </script>
 
 <template>
-  <UCard>
+  <UCard
+    class="card-wrapper transition-colors duration-500 ease-in-out"
+    :class="{
+      'bg-white dark:bg-gray-900': !blurBackground,
+      'bg-white/60 backdrop-blur-sm dark:bg-gray-900/60': blurBackground,
+    }"
+  >
     <template #header>
       <h2 class="text-xl font-semibold">
         {{ $t('section.experience.title') }}
@@ -88,12 +96,7 @@
       itemscope
       itemtype="https://schema.org/Person"
     >
-      <TransitionGroup
-        name="employment-list"
-        tag="div"
-        class="space-y-8"
-        appear
-      >
+      <TransitionGroup name="cards" tag="div" class="space-y-8" appear>
         <article
           v-for="(record, index) in recordsVisible"
           :key="record.id"
@@ -257,43 +260,3 @@
     </div>
   </UCard>
 </template>
-
-<style scoped>
-  .employment-list-enter-active {
-    animation: slideIn 0.6s ease-out both;
-    animation-delay: calc(var(--animation-order) * 0.15s);
-  }
-
-  .employment-list-leave-active {
-    animation: slideOut 0.4s ease-in forwards;
-  }
-
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideOut {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .employment-list-enter-active,
-    .employment-list-leave-active {
-      animation: none;
-    }
-  }
-</style>
