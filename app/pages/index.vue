@@ -129,7 +129,6 @@
     ogImageType: 'image/png',
     ogLocale: localeFormatted.value,
     ogLocaleAlternate: localeFormatted.value === 'uk_UA' ? 'en_US' : 'uk_UA',
-    ogSiteName: `${authorName.value} - Professional CV`,
     twitterCard: 'summary_large_image',
     twitterTitle: pageTitle.value,
     twitterDescription: pageDescription.value,
