@@ -35,7 +35,7 @@
         height="160"
         loading="eager"
       />
-      <h1 class="text-center text-2xl font-bold">
+      <h1 class="flex justify-center gap-1 text-2xl font-bold">
         <span class="p-given-name" itemprop="givenName">
           {{ profile.firstName }}
         </span>
