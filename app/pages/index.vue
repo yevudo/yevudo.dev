@@ -86,26 +86,16 @@
       knowsLanguage: profile.value.spokenLanguages.map((lang) => ({
         '@type': 'Language',
         name: lang.name,
-        proficiencyLevel: lang.level,
       })),
       worksFor: employmentsRecords.value.map((job) => ({
         '@type': 'Organization',
         name: job.company.name,
         url: job.company.website,
-        location: job.location,
       })),
       alumniOf: educationsRecords.value.map((edu) => ({
         '@type': 'EducationalOrganization',
         name: edu.institution,
         url: edu.institutionLink,
-      })),
-      creator: petProjects.value.map((project) => ({
-        '@type': 'SoftwareApplication',
-        name: project.name,
-        description: project.description,
-        url: project.projectLink,
-        applicationCategory: project.technologies.join(', '),
-        codeRepository: project.repoLink,
       })),
     };
   });

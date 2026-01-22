@@ -66,7 +66,7 @@
         ]"
         itemprop="alumniOf"
         itemscope
-        itemtype="https://schema.org/EducationalOccupationalCredential"
+        itemtype="https://schema.org/EducationalOrganization"
       >
         <div class="mb-3 flex items-start gap-3">
           <div
@@ -82,16 +82,14 @@
               target="_blank"
               rel="noopener noreferrer"
               class="p-org h-card text-lg font-bold transition-colors hover:text-primary"
-              itemprop="educationalCredentialAwarded"
-              itemscope
-              itemtype="https://schema.org/Organization"
+              itemprop="url"
             >
               <span itemprop="name">{{ record.institution }}</span>
             </a>
             <h3
               v-else
               class="p-org text-lg font-bold"
-              itemprop="credentialCategory"
+              itemprop="name"
             >
               {{ record.institution }}
             </h3>
@@ -100,7 +98,7 @@
               v-if="record.degree"
               class="p-name mt-1 font-medium text-gray-700 dark:text-gray-300"
             >
-              <span itemprop="name">{{ record.degree }}</span>
+              {{ record.degree }}
             </p>
 
             <div
@@ -116,7 +114,6 @@
                   v-if="record.startDate"
                   class="dt-start"
                   :datetime="record.startDate"
-                  itemprop="dateCreated"
                 >
                   {{ formatDate(record.startDate, locale) }}
                 </time>
@@ -125,7 +122,6 @@
                   v-if="record.endDate"
                   class="dt-end"
                   :datetime="record.endDate"
-                  itemprop="expires"
                 >
                   {{ formatDate(record.endDate, locale) }}
                 </time>
@@ -139,7 +135,7 @@
                   class="h-4 w-4"
                   aria-hidden="true"
                 />
-                <span class="p-location" itemprop="location">
+                <span class="p-location">
                   {{ record.location }}
                 </span>
               </span>
@@ -149,7 +145,7 @@
                   class="h-4 w-4"
                   aria-hidden="true"
                 />
-                <span class="p-location" itemprop="location">
+                <span class="p-location">
                   {{ $t('section.education.online') }}
                 </span>
               </span>
@@ -160,7 +156,7 @@
         <p
           class="p-summary text-base leading-relaxed text-gray-700 dark:text-gray-300"
         >
-          <span itemprop="description">{{ record.description }}</span>
+          {{ record.description }}
         </p>
       </article>
 

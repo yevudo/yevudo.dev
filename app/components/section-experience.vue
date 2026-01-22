@@ -186,13 +186,7 @@
                   class="h-4 w-4"
                   aria-hidden="true"
                 />
-                <span
-                  itemprop="location"
-                  itemscope
-                  itemtype="https://schema.org/Place"
-                >
-                  <span itemprop="name">{{ record.location }}</span>
-                </span>
+                <span>{{ record.location }}</span>
               </span>
             </div>
           </div>

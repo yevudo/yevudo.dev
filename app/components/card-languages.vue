@@ -24,7 +24,7 @@
         <span class="p-skill text-base font-medium" itemprop="name">
           {{ lang.name }}
         </span>
-        <span class="text-base text-gray-500" itemprop="proficiencyLevel">
+        <span class="text-base text-gray-500">
           {{ lang.level }}
         </span>
       </div>
