@@ -21,21 +21,17 @@
       </h2>
     </template>
 
-    <div
-      class="h-resume space-y-4"
-      itemscope
-      itemtype="https://schema.org/Person"
-    >
+    <div class="h-resume space-y-4">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <article
           v-for="(project, index) in petProjects"
           v-show="!isCollapsed || index < 4"
           :key="project.id"
           class="h-entry group rounded-lg border border-gray-200 p-5 transition-all duration-300 hover:border-primary hover:shadow-lg dark:border-gray-700"
-          itemprop="creator"
           itemscope
           itemtype="https://schema.org/SoftwareApplication"
         >
+          <meta itemprop="operatingSystem" content="Web" />
           <div class="mb-3 flex items-start justify-between gap-2">
             <h3
               class="p-name flex-1 text-base font-bold transition-colors group-hover:text-primary"
